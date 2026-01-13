@@ -139,12 +139,16 @@ export const Hero: React.FC = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
               </span>
-              <span className="text-white">Accepting Jobs for Summer 2026</span>
+              <span className="text-white">
+                {displayData?.availabilityText || 'Accepting Jobs for Summer 2026'}
+              </span>
             </div>
             <span className="hidden sm:block h-4 w-px bg-white/20"></span>
             <div className="flex items-center gap-1.5 text-sky-100/80">
               <MapPin className="w-3.5 h-3.5" />
-              <span>Auckland • Wellington • Christchurch</span>
+              <span>
+                {displayData?.locations || 'Auckland • Wellington • Christchurch'}
+              </span>
             </div>
           </div>
 
