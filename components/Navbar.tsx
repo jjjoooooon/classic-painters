@@ -7,7 +7,36 @@ export const Navbar: React.FC = () => {
   const { settings } = useContent();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false); // New state for fade-in
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Parse navbar links from settings
+  const navLinks = React.useMemo(() => {
+    if (settings.navbarLinks) {
+      try {
+        const parsed = typeof settings.navbarLinks === 'string'
+          ? JSON.parse(settings.navbarLinks)
+          : settings.navbarLinks;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map((link: any) => ({
+            name: link.label || link.name,
+            href: link.url || link.href
+          }));
+        }
+      } catch (e) {
+        console.error("Error parsing navbar links:", e);
+      }
+    }
+    return [
+      { name: 'Services', href: '#services' },
+      { name: 'Our Work', href: '#gallery' },
+      { name: 'Why Us', href: '#why-us' },
+      { name: 'Reviews', href: '#testimonials' },
+    ];
+  }, [settings.navbarLinks]);
+
+  const contactPhone = settings.contactPhone || '0800 PAINTER';
+  const ctaText = settings.navbarCtaText || 'Get a Quote';
+  const ctaLink = settings.navbarCtaLink || '#contact';
 
   // 1. Handle Initial Fade-In
   useEffect(() => {
@@ -31,13 +60,6 @@ export const Navbar: React.FC = () => {
       document.body.style.overflow = '';
     }
   }, [isMobileMenuOpen]);
-
-  const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Our Work', href: '#gallery' },
-    { name: 'Why Us', href: '#why-us' },
-    { name: 'Reviews', href: '#testimonials' },
-  ];
 
   return (
     <>
@@ -114,22 +136,28 @@ export const Navbar: React.FC = () => {
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
               <a
-                href="tel:0800PAINTER"
+                href={`tel:${contactPhone.replace(/\s/g, '')}`}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border ${isScrolled
                   ? 'border-transparent text-slate-600 hover:bg-slate-50'
                   : 'border-white/20 text-white bg-white/5 hover:bg-white/10 backdrop-blur-sm'
                   }`}
               >
                 <Phone size={16} className={isScrolled ? "text-nz-accent" : "text-sky-300"} />
-                <span className="hidden xl:inline">0800 PAINTER</span>
+                <span className="hidden xl:inline">{contactPhone}</span>
               </a>
 
               <Button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  if (ctaLink.startsWith('#')) {
+                    document.getElementById(ctaLink.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.location.href = ctaLink;
+                  }
+                }}
                 className={`rounded-xl px-6 py-2.5 h-auto text-sm shadow-lg shadow-sky-500/20 transition-transform hover:scale-105 active:scale-95 ${!isScrolled && "bg-white text-nz-accent hover:bg-sky-50 border-0"
                   }`}
               >
-                Get a Quote
+                {ctaText}
               </Button>
             </div>
 
@@ -190,7 +218,7 @@ export const Navbar: React.FC = () => {
               <Button
                 variant="outline"
                 className="rounded-xl border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
-                onClick={() => window.location.href = 'tel:0800PAINTER'}
+                onClick={() => window.location.href = `tel:${contactPhone.replace(/\s/g, '')}`}
               >
                 <Phone size={16} className="mr-2" />
                 Call Us
@@ -199,10 +227,14 @@ export const Navbar: React.FC = () => {
                 className="rounded-xl shadow-lg shadow-sky-500/20"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  if (ctaLink.startsWith('#')) {
+                    document.getElementById(ctaLink.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.location.href = ctaLink;
+                  }
                 }}
               >
-                Get Quote
+                {ctaText}
                 <ChevronRight size={16} className="ml-1" />
               </Button>
             </div>
