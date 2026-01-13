@@ -7,6 +7,7 @@ import { GalleryPage } from './pages/GalleryPage';
 import { About } from './pages/About';
 import { ContentProvider, useContent } from './context/ContentContext';
 import { Preloader } from './components/Preloader';
+import { ScrollToTop } from './components/ScrollToTop';
 
 const MainLayout = () => {
   const { loading, settings } = useContent();
@@ -40,6 +41,7 @@ const MainLayout = () => {
       </main>
       <Footer />
       <StickyMobileCTA />
+      <ScrollToTop />
     </div>
   );
 };
