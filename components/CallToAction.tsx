@@ -100,11 +100,11 @@ export const CallToAction: React.FC = () => {
 
             {/* Secondary Button (Updated with Phone Number) */}
             <a
-              href="tel:0220963037"
+              href="tel:0272161893"
               className="group flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-8 py-4 font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all shadow-sm hover:shadow-md"
             >
               <Phone size={20} className="text-nz-accent" />
-              <span>Call 022 096 3037</span>
+              <span>Call 0272161893</span>
             </a>
 
           </div>

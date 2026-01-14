@@ -23,8 +23,8 @@ export const Hero: React.FC = () => {
     bgImageUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2670&auto=format&fit=crop',
     primaryBtnText: 'Get Your Free Quote',
     primaryBtnLink: '#contact',
-    secondaryBtnText: 'Call 0220963037',
-    secondaryBtnLink: 'tel:0220963037'
+    secondaryBtnText: 'Call 0272161893',
+    secondaryBtnLink: 'tel:0272161893'
   };
 
   const displayData = heroData || defaultHero;
