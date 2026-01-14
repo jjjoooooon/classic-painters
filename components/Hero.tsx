@@ -7,7 +7,7 @@ import { useContent } from '../context/ContentContext';
 
 const FEATURES = [
   "Licensed Master Painters",
-  "5-Year Workmanship Warranty",
+  "10-Year Workmanship Warranty",
   "100% Kiwi Owned & Operated"
 ];
 
