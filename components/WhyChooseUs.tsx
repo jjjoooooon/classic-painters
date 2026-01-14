@@ -88,7 +88,7 @@ export const WhyChooseUs: React.FC = () => {
           </div>
 
            {/* Wide Feature - Team */}
-           <div className="feature-card lg:col-span-2 bg-nz-blue text-white p-8 rounded-3xl flex flex-col md:flex-row items-center gap-6 shadow-lg min-h-[200px]">
+           <div className="feature-card lg:col-span-2 bg-nz-blue text-white p-8 rounded-3xl flex flex-col md:flex-row items-start lg:items-center gap-6 shadow-lg min-h-[200px]">
              <div className="p-4 bg-white/10 rounded-full shrink-0">
                <UserCheck size={32} className="text-sky-400" />
              </div>

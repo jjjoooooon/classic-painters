@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, Paintbrush, ArrowRight, ChevronRight, Calculator } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useContent } from '../context/ContentContext';
+import { useUI } from '../context/UIContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
   const { settings } = useContent();
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useUI();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Parse navbar links from settings
   const navLinks = React.useMemo(() => {
@@ -34,9 +38,43 @@ export const Navbar: React.FC = () => {
     ];
   }, [settings.navbarLinks]);
 
-  const contactPhone = settings.contactPhone || '0800 PAINTER';
+  const contactPhone = settings.contactPhone || '0220963037';
   const ctaText = settings.navbarCtaText || 'Get a Quote';
   const ctaLink = settings.navbarCtaLink || '#contact';
+
+  // Handle navigation for hash links
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    // Close mobile menu first
+    setIsMobileMenuOpen(false);
+
+    // If it's a hash link (starts with #)
+    if (href.startsWith('#')) {
+      const sectionId = href.substring(1);
+
+      // If we're not on the home page, navigate there first
+      if (location.pathname !== '/') {
+        navigate('/');
+        // Wait for navigation and page render
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 300);
+      } else {
+        // Already on home page, scroll immediately without delay
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    } else {
+      // Not a hash link, navigate normally
+      window.location.href = href;
+    }
+  };
 
   // 1. Handle Initial Fade-In
   useEffect(() => {
@@ -103,7 +141,7 @@ export const Navbar: React.FC = () => {
               )}
               <div className="flex flex-col">
                 <span
-                  className={`text-lg font-bold tracking-tight leading-none transition-colors duration-300 ${isScrolled ? 'text-slate-900' : 'text-white'
+                  className={`text-lg font-bold tracking-tight leading-none transition-colors duration-300 ${isScrolled ? 'text-slate-900' : isMobileMenuOpen ? 'text-slate-900' : 'text-white'
                     }`}
                 >
                   Classic Painters
@@ -121,7 +159,8 @@ export const Navbar: React.FC = () => {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className={`block px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${isScrolled
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`block px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer ${isScrolled
                         ? 'text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-sm'
                         : 'text-slate-200 hover:text-white hover:bg-white/20'
                         }`}
@@ -180,7 +219,7 @@ export const Navbar: React.FC = () => {
 
       {/* --- Mobile Menu --- */}
       <div
-        className={`fixed inset-0 z-40 bg-white/95 backdrop-blur-xl flex flex-col pt-28 pb-10 px-6 overflow-y-auto transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        className={`fixed inset-0 z-[41] bg-white/95 backdrop-blur-xl flex flex-col pt-28 pb-10 px-6 overflow-y-auto transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
           }`}
       >
         <div className="flex flex-col h-full max-w-lg mx-auto w-full">
@@ -190,8 +229,8 @@ export const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="group flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="group flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100 cursor-pointer"
               >
                 <span className="text-3xl font-bold text-slate-900 group-hover:text-nz-accent transition-colors">
                   {link.name}
@@ -217,14 +256,14 @@ export const Navbar: React.FC = () => {
             <div className="grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
-                className="rounded-xl border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+                className="rounded-xl border-slate-200 bg-white hover:bg-slate-50 text-md text-slate-700"
                 onClick={() => window.location.href = `tel:${contactPhone.replace(/\s/g, '')}`}
               >
                 <Phone size={16} className="mr-2" />
                 Call Us
               </Button>
               <Button
-                className="rounded-xl shadow-lg shadow-sky-500/20"
+                className="rounded-xl shadow-lg text-sm shadow-sky-500/20"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   if (ctaLink.startsWith('#')) {
@@ -241,7 +280,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="mt-6 flex justify-between items-center text-xs font-medium text-slate-400 px-2">
-            <span>© 2026 NZ Painters</span>
+            <span>© 2026 Classic Painters</span>
             <div className="flex gap-4">
               <a href="#" className="hover:text-slate-600">Privacy</a>
               <a href="#" className="hover:text-slate-600">Terms</a>

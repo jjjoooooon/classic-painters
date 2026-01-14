@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { SEO } from '../components/SEO';
 import { Gallery } from '../components/Gallery';
 import gsap from 'gsap';
 import { Camera, ArrowDown } from 'lucide-react';
@@ -28,10 +28,12 @@ export const GalleryPage: React.FC = () => {
 
     return (
         <>
-            <Helmet>
-                <title>Our Work | Premium Painting Portfolio NZ</title>
-                <meta name="description" content="Browse our portfolio of completed residential and commercial painting projects in Auckland and Wellington." />
-            </Helmet>
+            <SEO
+                title="Our Work | Premium Painting Portfolio NZ"
+                description="Browse our portfolio of completed residential and commercial painting projects in Auckland and Wellington. See the quality craftsmanship we deliver."
+                keywords="painting portfolio NZ, completed projects, residential painting, commercial painting"
+                type="website"
+            />
 
             <div className="min-h-screen bg-slate-50">
                 {/* --- 1. Dark Hero Section (Supports Transparent Navbar) --- */}

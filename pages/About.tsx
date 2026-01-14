@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { SEO } from '@/components/SEO';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CheckCircle2, ShieldCheck, Users, Clock, Award, HardHat } from 'lucide-react';
@@ -89,10 +89,12 @@ export const About: React.FC = () => {
 
     return (
         <div ref={containerRef} className="bg-white min-h-screen">
-            <Helmet>
-                <title>About Us | NZ Premium Painters</title>
-                <meta name="description" content="Learn about our team of licensed master painters. 100% Kiwi owned and operated, serving Auckland, Wellington, and Christchurch since 2010." />
-            </Helmet>
+            <SEO
+                title="About Us | NZ Premium Painters"
+                description="Learn about our team of licensed master painters. 100% Kiwi owned and operated, serving Auckland, Wellington, and Christchurch since 2010."
+                keywords="licensed painters NZ, master painters, professional painting team, Kiwi owned painters"
+                type="website"
+            />
 
             {/* --- 1. HERO SECTION (Dark for Navbar) --- */}
             <section className="relative pt-40 pb-24 lg:pt-52 lg:pb-32 bg-slate-900 overflow-hidden">

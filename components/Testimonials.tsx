@@ -166,7 +166,7 @@ export const Testimonials: React.FC = () => {
   );
 
   return (
-    <div ref={comp} className="relative overflow-hidden py-16 md:py-24 bg-slate-50">
+    <div id="testimonials" ref={comp} className="relative overflow-hidden py-16 md:py-24 bg-slate-50">
       {/* ... (keep background) */}
       <div ref={bgRef} className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-white"></div>

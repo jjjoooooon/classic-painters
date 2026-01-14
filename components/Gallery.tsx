@@ -65,9 +65,11 @@ export const Gallery: React.FC<GalleryProps> = ({ limit }) => {
     <div ref={comp}>
       <Section id="gallery">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div className="max-w-2xl">
-            <span className="text-nz-accent font-semibold tracking-wider uppercase text-sm">Recent Projects</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Our Latest Work</h2>
+          <div className="lg:max-w-2xl w-full ">
+            <div className='flex-col flex justify-end w-full items-center lg:items-start'>
+              <span className="text-nz-accent font-semibold tracking-wider uppercase text-sm">Recent Projects</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Our Latest Work</h2>
+            </div>
           </div>
           <div className="hidden md:block">
             <p className="text-slate-500">Transforming spaces across New Zealand.</p>
@@ -104,7 +106,7 @@ export const Gallery: React.FC<GalleryProps> = ({ limit }) => {
           <div className="mt-12 text-center">
             <Link
               to="/gallery"
-              className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-nz-accent transition-colors duration-300"
+              className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-nz-accent transition-colors duration-300"
             >
               View All Projects
               <ArrowUpRight size={20} />

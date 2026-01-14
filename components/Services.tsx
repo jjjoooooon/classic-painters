@@ -179,8 +179,8 @@ export const Services: React.FC = () => {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/40 via-slate-900 to-slate-900"></div>
             <div className="relative z-10 space-y-4">
               <h3 className="text-2xl font-bold">Have a custom project?</h3>
-              <div className="flex items-center gap-2 text-blue-200 group-hover:text-white transition-colors">
-                <span>Get a Quote</span>
+              <div className="flex justify-center items-center gap-2 text-blue-200 group-hover:text-white transition-colors">
+                <span className='text-center'>Get a Quote</span>
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </div>

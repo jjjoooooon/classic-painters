@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { GalleryPage } from './pages/GalleryPage';
 import { About } from './pages/About';
 import { ContentProvider, useContent } from './context/ContentContext';
+import { UIProvider } from './context/UIContext';
 import { Preloader } from './components/Preloader';
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -48,11 +49,13 @@ const MainLayout = () => {
 
 function App() {
   return (
-    <ContentProvider>
-      <Router>
-        <MainLayout />
-      </Router>
-    </ContentProvider>
+    <UIProvider>
+      <ContentProvider>
+        <Router>
+          <MainLayout />
+        </Router>
+      </ContentProvider>
+    </UIProvider>
   );
 }
 

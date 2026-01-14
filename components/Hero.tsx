@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { SEO } from './SEO';
 import { Button } from './ui/Button';
 import { CheckCircle2, Phone, ArrowRight, MapPin, Star, Clock } from 'lucide-react';
 import gsap from 'gsap';
@@ -102,17 +102,13 @@ export const Hero: React.FC = () => {
       className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center"
     >
       {/* --- SEO METADATA --- */}
-      <Helmet>
-        <title>Premium House Painters NZ | Interior & Exterior Painting Services</title>
-        <meta name="description" content="Top-rated residential and commercial painters in Auckland, Wellington & Christchurch. Get a free quote for interior, exterior, and roof painting today." />
-        <meta name="keywords" content="painters NZ, house painting, commercial painters, roof painting, exterior painting" />
-        <link rel="canonical" href="https://www.yourwebsite.co.nz/" />
-
-        {/* Open Graph for Social Sharing */}
-        <meta property="og:title" content="Premium House Painters NZ" />
-        <meta property="og:description" content="5-Year Warranty on all residential and commercial painting jobs." />
-        <meta property="og:image" content={displayData?.bgImageUrl || "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200"} />
-      </Helmet>
+      <SEO
+        title="Premium House Painters NZ | Interior & Exterior Painting Services"
+        description="Top-rated residential and commercial painters in Auckland, Wellington & Christchurch. Get a free quote for interior, exterior, and roof painting today."
+        keywords="painters NZ, house painting, commercial painters, roof painting, exterior painting, interior painting"
+        image={displayData?.bgImageUrl}
+        type="website"
+      />
 
       {/* --- BACKGROUND LAYER --- */}
       <div className="absolute inset-0 z-0 bg-slate-900 pointer-events-none">
@@ -133,7 +129,7 @@ export const Hero: React.FC = () => {
         <div className="max-w-4xl">
 
           {/* Trust Badge */}
-          <div className="hero-anim inline-flex flex-wrap items-center gap-x-3 gap-y-2 bg-white/5 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium text-sky-200 mb-8 border border-white/10 ring-1 ring-white/5 shadow-xl">
+          <div className="hero-anim hidden sm:inline-flex flex-wrap items-center gap-x-3 gap-y-2 bg-white/5 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium text-sky-200 mb-8 border border-white/10 ring-1 ring-white/5 shadow-xl">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -143,7 +139,7 @@ export const Hero: React.FC = () => {
                 {displayData?.availabilityText || 'Accepting Jobs for Summer 2026'}
               </span>
             </div>
-            <span className="hidden sm:block h-4 w-px bg-white/20"></span>
+            <span className="h-4 w-px bg-white/20"></span>
             <div className="flex items-center gap-1.5 text-sky-100/80">
               <MapPin className="w-3.5 h-3.5" />
               <span>
@@ -206,7 +202,7 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Social Proof */}
-            <div className="flex items-center gap-4 text-xs sm:text-sm text-slate-400 pl-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-xs sm:text-sm text-slate-400 pl-2">
               <div className="flex items-center gap-1.5">
                 <div className="flex">
                   {[1, 2, 3, 4, 5].map(i => (
@@ -215,7 +211,7 @@ export const Hero: React.FC = () => {
                 </div>
                 <span className="text-slate-300 font-medium">4.9/5 Rating</span>
               </div>
-              <span className="w-1 h-1 rounded-full bg-slate-600"></span>
+              <span className="hidden sm:block w-1 h-1 rounded-full bg-slate-600"></span>
               <div className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-sky-400" />
                 <span>Fast reply: usually within 1 hour</span>

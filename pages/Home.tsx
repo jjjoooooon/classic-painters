@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
             <WhyChooseUs />
             <BeforeAfter />
             <Process />
-            <Gallery limit={6} />
+            <Gallery limit={4} />
             <Testimonials />
             <CallToAction />
             <ContactSection />
